@@ -1,5 +1,5 @@
 # ddns_cloudflare
-Shell script that updates cloudflare's DNS record to match your public IP. All in a Docker container and ready to deploy in kubernetes.
+Shell script that updates cloudflare's DNS record to match your public IP. All in a Docker container and ready to deploy in kubernetes. Docker image is for armhf architecture (runs in a raspberry pi).
 
 Credits to [steasdal](https://github.com/steasdal/ddclient-alpine) for most of the yaml configuration files.
 
