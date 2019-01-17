@@ -1,0 +1,1 @@
+*/3 * * * * /ddns_cloudflare.sh 2>&1 | /usr/bin/logger -t ddns_cloudflare

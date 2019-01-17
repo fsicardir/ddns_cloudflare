@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ddns-persistent-volume-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+  storageClassName: ddns
+
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ddns-deployment
+spec:
+  replicas: 1 # Request a single replica
+  template:
+    metadata:
+      labels:
+        app: ddns
+    spec:
+      containers:
+      - name: ddns-cloudflare
+        image: fsicardir/ddns_cloudflare:latest
+        volumeMounts:
+        - mountPath: "/var/cache/ddns"
+          name: ddns-pvc
+        env:
+        - name: USER_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-secret
+              key: user_email
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-secret
+              key: api_key
+        - name: DOMAIN_NAME
+          value: "fsicardir.tk"
+        - name: ZONE_ID
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-secret
+              key: zone_id
+        - name: RECORD_ID
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-secret
+              key: record_id
+        - name: CACHE_FILE
+          value: "/var/cache/ddns/public-ip"
+      volumes:
+        - name: ddns-pvc
+          persistentVolumeClaim:
+            claimName: ddns-persistent-volume-claim
+
