@@ -2,6 +2,9 @@
   kind: PersistentVolume
   metadata:
     name: ddns-persistent-volume
+    labels: {
+        app: ddns
+    }
   spec:
     capacity:
       storage: 5Mi
