@@ -5,6 +5,9 @@ Credits to [steasdal](https://github.com/steasdal/ddclient-alpine) for most of t
 
 Docker image available in [Docker Hub](https://cloud.docker.com/repository/docker/fsicardir/ddns_cloudflare).
 
+### Build image:
+Open the console and type: 
+`docker image build . -t <tag>`
 
 ### Deploy in kubernetes cluster:
 - Change the fields in _cloudflare-secret.yaml_ to match your own data. Remember it must be encoded in base64 (`echo -n yourRawDataString | base64`).
