@@ -36,7 +36,7 @@ update=$(curl -X PUT "https://api.cloudflare.com/client/v4/zones/$(echo "$ZONE_I
      -H "X-Auth-Email: $USER_EMAIL" \
      -H "X-Auth-Key: $API_KEY" \
      -H "Content-Type: application/json" \
-     --data "{\"id\":\"$RECORD_ID\",\"type\":\"A\",\"name\":\"$DOMAIN_NAME\",\"content\":\"$IP\",\"proxied\":\"true\"}" \
+     --data "{\"id\":\"$RECORD_ID\",\"type\":\"A\",\"name\":\"$DOMAIN_NAME\",\"content\":\"$IP\"}" \
      --http1.0)
 
 if [ $? -ne 0 ] || [[ $update == *"\"success\": false,"* ] ]
